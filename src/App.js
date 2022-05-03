@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Form from './components/Form';
+import List from './components/List';
+import Section from './components/Section';
 
-function App() {
+const appTitle = 'Edward To-Do List App';
+
+const list = [
+  { title: 'Todo test #1', completed: false },
+  { title: 'Todo test #2', completed: false },
+  { title: 'Todo test #3', completed: false },
+  { title: 'Todo test #4', completed: false },
+];
+
+const App = () => {
+  const [todoList, setTodoList] = useState(list);
+
+  const addTodo = (item) => {
+    setTodoList((oldList) => [...oldList, item]);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="ui container center aligned">
+      <Section>
+        <h1>{appTitle}</h1>
+      </Section>
+      <Section>
+        <Form addTodo={addTodo} />
+      </Section>
+      <Section>
+        <List list={todoList} />
+      </Section>
     </div>
   );
-}
+};
 
 export default App;
